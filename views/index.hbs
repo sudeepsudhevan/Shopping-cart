@@ -41,61 +41,25 @@
   <section>
     <div class="container mt-5">
       <div class="row">
+        {{#each products}}
+
         <div class="col-md-3">
           <div class="card" style="width: 18rem;">
             <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNvRyMLIUVy7HShtaMxTtmbnxw-g8pv-dCXf-yIfS9e4aLkyLubOUg41HRKVkuoyEI_F4&usqp=CAU"
+              src="{{this.Image}}"
               class="card-img-top" alt="...">
             <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-                content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
+              <h5 class="card-title">{{this.name}}</h5>
+              <p class="card-text">{{this.description}}</p>
+              <a href="#" class="btn btn-primary">Add to Cart</a>
             </div>
           </div>
 
         </div>
-        <div class="col-md-3">
-          <div class="card" style="width: 18rem;">
-            <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNvRyMLIUVy7HShtaMxTtmbnxw-g8pv-dCXf-yIfS9e4aLkyLubOUg41HRKVkuoyEI_F4&usqp=CAU"
-              class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-                content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="card" style="width: 18rem;">
-            <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNvRyMLIUVy7HShtaMxTtmbnxw-g8pv-dCXf-yIfS9e4aLkyLubOUg41HRKVkuoyEI_F4&usqp=CAU"
-              class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-                content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-          </div>
+        {{/each}}
 
-        </div>
-        <div class="col-md-3">
-          <div class="card" style="width: 18rem;">
-            <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNvRyMLIUVy7HShtaMxTtmbnxw-g8pv-dCXf-yIfS9e4aLkyLubOUg41HRKVkuoyEI_F4&usqp=CAU"
-              class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-                content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-          </div>
 
-        </div>
+
 
       </div>
   </section>
