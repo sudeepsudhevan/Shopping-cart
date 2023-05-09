@@ -29,7 +29,7 @@ router.get('/', function (req, res, next) {
       Image: "https://www.gizmochina.com/wp-content/uploads/2021/06/4-500x500.jpg",
     }
   ]
-  res.render('index', { products });
+  res.render('index', { products,admin: false });
 });
 
 module.exports = router;
