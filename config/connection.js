@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const MongoClient = require('mongodb').MongoClient;
 const state = {
   db: null
 };
@@ -8,8 +8,8 @@ module.exports.connect = async function(done) {
   const dbName = 'shopping';
 
   try {
-    await mongoose.connect(`${url}/${dbName}`);
-    state.db = mongoose.connection;
+    const data = await MongoClient.connect(url);
+    state.db = data.db(dbName);
     done();
   } catch (err) {
     done(err);
