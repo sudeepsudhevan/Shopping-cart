@@ -5,7 +5,7 @@ var productHelpers = require('../helpers/product-helpers');
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {
-  productHelpers.getAllProducts().then((products) => {
+    productHelpers.getAllProducts().then((products) => {
     console.log(products);
     res.render('admin/view-products', { admin: true, products });
   });
@@ -17,19 +17,25 @@ router.get('/add-product', function (req, res) {
 
 });
 router.post('/add-product', function (req, res) {
-  let image = req.files.Image;
-  let imagePath = '/product-images/' + Date.now() + '.jpg';
-  image.mv('./public' + imagePath, (err, done) => {
-    if (!err) {
-      let product = req.body;
-      product.image = imagePath;
-      productHelpers.addProduct(product, (id) => {
-        res.render("admin/add-product", { admin: true });
-      });
-    } else {
-      console.log(err);
-    }
-  });
+
+
+  productHelpers.addProduct(req.body, (id) => {
+    // Log the value of the id argument
+    console.log('id:', id);
+    let image = req.files.Image;
+    
+    
+    image.mv('./public/product-images/'+id+'.jpg' ,(err, done) => {
+      if (!err) {
+        
+        res.render("admin/add-product", { admin: true })
+      } else {
+        console.log(err);
+      }
+    })
+
+  })
+
 });
 
 module.exports = router;
