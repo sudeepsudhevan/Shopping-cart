@@ -1,7 +1,7 @@
 var express = require('express');
 const { render } = require('../app');
 var router = express.Router();
-var productHelpers = require('../helpers/product-helpers');
+const productHelpers = require('../helpers/product-helpers');
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {
