@@ -1,6 +1,6 @@
 var db = require('../config/connection');
 var collection = require('../config/collections');
-const collections = require('../config/collections');
+
 
 // add product to database
 
@@ -8,9 +8,9 @@ module.exports = {
     addProduct: (product, callback) => {
         
         db.get().collection('product').insertOne(product).then((data) => {
+            console.log(data.insertedId);
             
-            
-            callback(data._id);
+            callback(data.insertedId);
         })
         .catch((err)=>{
             console.log(err);
