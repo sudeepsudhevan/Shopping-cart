@@ -12,31 +12,35 @@
             <a class="nav-link active" aria-current="page" href="/">Products</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Cart</a>
+            <a class="nav-link" href="/cart">Cart</a>
           </li>
+          {{#if user}}
+
           <li class="nav-item">
             <a class="nav-link" href="#">Orders</a>
           </li>
+          {{/if}}
         </ul>
 
 
         <div class="dropdown">
-          <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" id="dropdownMenuButton" aria-expanded="false">
+          <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+            data-bs-target="#myDropdownMenu" aria-expanded="false">
             {{#if user}}
-              {{user.name}}
+            {{user.name}}
             {{else}}
-              Account
+            Account
             {{/if}}
-            
-            </button>
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton"> 
+          </button>
+          <ul class="dropdown-menu" id="myDropdownMenu">
             {{#if user}}
-              <a class="dropdown-item" href="/logout">logout</a>
+            <a class="dropdown-item" href="/logout">logout</a>
             {{else}}
-              <a class="dropdown-item" href="/login">login</a>
+            <a class="dropdown-item" href="/login">login</a>
             {{/if}}
           </ul>
         </div>
+
       </div>
     </div>
   </nav>
