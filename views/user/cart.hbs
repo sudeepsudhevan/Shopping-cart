@@ -1,4 +1,30 @@
-<div class="row">
-    <p class="text-center">No products found</p>
-    
-</div>
+<section>
+    <div class="container">
+        <table class="table mt-5">
+            <thead>
+                <tr>
+                    <th scope="col">Item</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Qantity</th>
+                </tr>
+            </thead>
+        
+        <tbody>
+            {{#each products}}
+            <tr>
+                <td>
+                    <img alt="" style="width: 70px;height: 70px;" src="/product-images/{{product._id}}.jpg">
+                </td>
+                <td>{{product.Name}}</td>
+                <td>
+                    <button class="cart-item-count me-3">-</button>1<button class="cart-item-count ms-3">+</button>
+                </td>
+                <td>
+                    <a href="" class="btn btn-danger ">Remove</a>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+        </table>
+    </div>
+</section>
