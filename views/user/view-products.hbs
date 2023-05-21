@@ -12,15 +12,16 @@
               <h5 class="card-title">{{this.Name}}</h5>
               <p class="card-text">{{this.Description}}</p>
               <p class="card-text">Rs. {{this.Price}}</p>  
-              <a href="#" class="btn btn-primary">Add to Cart</a>
+              
+              <button onclick="addToCart('{{this._id}}')"class="btn btn-primary">Add to Cart</button>
             </div>
           </div>
 
         </div>
         {{/each}}
 
-
-
-
       </div>
-  </section>
+
+    </div>
+  </div>
+</section>
