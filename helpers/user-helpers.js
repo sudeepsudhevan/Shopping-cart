@@ -49,13 +49,13 @@ module.exports = {
         return new Promise(async (resolve, reject) => {
             let userCart = await db.get().collection(collection.CART_COLLECTIONS).findOne({ user:new objectId(userId) })
             if (userCart) {
-                let proExist = userCart.products.findIndex(product => product.item == proId)
+                let proExist = userCart.products.findIndex(product => product.item == proId) //findIndex is a function to find the index of the product
                 console.log(proExist);
                 if (proExist != -1) {
                     db.get().collection(collection.CART_COLLECTIONS)
                         .updateOne({ user:new objectId(userId), 'products.item':new objectId(proId) },
                             {
-                                $inc: { 'products.$.quantity': 1 }
+                                $inc: { 'products.$.quantity': 1 } //$.quantity is the quantity of the product
                             }).then(() => {
                                 resolve()
                             })
@@ -84,23 +84,23 @@ module.exports = {
         return new Promise(async(resolve, reject) => {
             let cartItems = await db.get().collection(collection.CART_COLLECTIONS).aggregate([
                 {
-                    $match: { user:new objectId(userId) }
+                    $match: { user:new objectId(userId) }  //match is a function to match the user id
                 },
                 {
-                    $unwind: '$products'
+                    $unwind: '$products'   //unwind is a function to unwind the products array
                 },
                 {
-                    $project: {
-                        item: '$products.item',
+                    $project: {                 
+                        item: '$products.item',     
                         quantity: '$products.quantity'
                     }
                 },
                 {
-                    $lookup: {
-                        from: collection.PRODUCT_COLLECTIONS,
-                        localField: 'item',
-                        foreignField: '_id',
-                        as: 'product'
+                    $lookup: {                         
+                        from: collection.PRODUCT_COLLECTIONS, 
+                        localField: 'item',        //localField is the field in the cart collection
+                        foreignField: '_id',        //foreignField is the field in the product collection
+                        as: 'product'           //as is the name of the array
                     }
                 },
                 {
@@ -109,7 +109,8 @@ module.exports = {
                     }
                 }
             ]).toArray()
-            console.log(cartItems);
+            // console.log(cartItems);
+            console.log(cartItems[0].product);
             resolve(cartItems)
         })
     },
