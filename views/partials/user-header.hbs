@@ -23,20 +23,19 @@
         </ul>
 
 
-        <div class="dropdown">
-          <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-            data-bs-target="#myDropdownMenu" aria-expanded="false">
+        <div class="dropdown ms-auto">
+          <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
             {{#if user}}
             {{user.name}}
             {{else}}
             Account
             {{/if}}
           </button>
-          <ul class="dropdown-menu" id="myDropdownMenu">
+          <ul class="dropdown-menu dropdown-menu-lg-end">
             {{#if user}}
-            <a class="dropdown-item" href="/logout">logout</a>
+            <li><a class="dropdown-item" href="/logout">logout</a></li>
             {{else}}
-            <a class="dropdown-item" href="/login">login</a>
+            <li><a class="dropdown-item" href="/login">login</a></li>
             {{/if}}
           </ul>
         </div>
