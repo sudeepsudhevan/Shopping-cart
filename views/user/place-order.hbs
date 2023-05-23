@@ -1,0 +1,39 @@
+<section>
+    <div class="container">
+        <form action="">
+            <div class="row">
+                <div class="col-md-6">
+                    <h2>Enter Delivery Details</h2><br>
+                    <div>
+                        <label for="">Address</label>
+                        <textarea name="address" id="" cols="25" rows="7" class="form-control"></textarea>
+                        <label for="">Pincode</label>
+                        <input type="text" class="form-control" name="pincode">
+                        <label for="">Mobile</label>
+                        <input type="text" class="form-control" name="mobile">
+
+                    </div>
+                </div>
+                <div class="col-md-4 mt-auto p-2">
+
+                    <div class="container border border-2 p-5 mx-5 me-5">
+                        <h5>Total amount : Rs.{{total}} </h5>
+                        <hr>
+                        <div class="payment">
+                            <p>Payment method</p>
+                            <label for="" class="radio-inline">
+                                <input type="radio" name="payment" id="" value="cod">COD
+                            </label>
+                            <label for="" class="radio-inline" style="margin-right: 8.5rem;">
+                                <input type="radio" name="payment" id="" value="Online">Online Payment
+                            </label>
+                            <button class="btn btn-primary float-end" type="submit">checkout</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+    </div>
+
+</section>
