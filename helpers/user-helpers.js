@@ -161,7 +161,49 @@ module.exports = {
                 resolve({removeProduct:true})
             })
         })
-    }
+    },
+    getTotalAmount:(userId)=>{
+        return new Promise(async(resolve,reject)=>{
+            let total=await db.get().collection(collection.CART_COLLECTIONS).aggregate([
+                {
+                    $match:{user:new objectId(userId)}
+                },
+                {
+                    $unwind:'$products'
+                },
+                {
+                    $project:{
+                        item:'$products.item',
+                        quantity:'$products.quantity'
+                    }
+                },
+                {
+                    $lookup:{
+                        from:collection.PRODUCT_COLLECTIONS,
+                        localField:'item',
+                        foreignField:'_id',
+                        as:'product'
+                    }
+                },
+                {
+                    $project:{ 
+                        item:1,quantity:1,product:{$arrayElemAt:['$product',0]}
+                    }
+                },
+                {
+                    $group:{ //group is a function to group the products
+                    _id:null,
+                    total:{$sum:{$multiply:[
+                       {$convert: {input: '$quantity', to: 'double'}},
+                       {$convert: {input: '$product.Price', to: 'double'}}
+                    ]}} //multiply is a function to multiply the quantity and price of the product
+                    }
+                   }
+            ]).toArray()
+            console.log(total[0].total);
+            resolve(total[0].total)
+        })
+    }   
     
     
 }
