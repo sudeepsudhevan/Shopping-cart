@@ -1,0 +1,34 @@
+<section>
+    <div class="row">
+        <div class="col-md-12">
+            <h2>My Orders</h2>
+            <table class="table table-hovered">
+                <thead>
+                    <tr>
+                        <th>Order Id</th>
+                        <th>Product</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Payment Method</th>
+                        <th>Address</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each orders}}
+                    <tr>
+                        <td>{{this._id}}</td>
+                        <td>{{this.product.Name}}</td>
+                        <td>{{this.quantity}}</td>
+                        <td>{{this.total}}</td>
+                        <td>{{this.paymentMethod}}</td>
+                        <td>{{this.address}}</td>
+                        <td>{{this.status}}</td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
