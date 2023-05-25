@@ -113,20 +113,38 @@ router.post('/place-order', async(req, res) => {
   let products = await userHelpers.getCartProductList(req.body.userId);
   let totalPrice = await userHelpers.getTotalAmount(req.body.userId);
 
-  userHelpers.placeOrder(req.body,products,totalPrice).then((response) => {
-    res.json({status:true});
-
+  userHelpers.placeOrder(req.body,products,totalPrice).then((orderId) => {
+    if(req.body['payment-method'] === 'COD'){
+      
+    res.json({codsuccess:true});
+    }else{
+      
+      userHelpers.generateRazorpay(orderId,totalPrice).then((response) => {
+        res.json(response);
+      })
+    }
+      
   });
-  console.log(req.body);
+  
 });
 
-router.get('/orders',verifyLogin, async(req, res) => {
+router.get('/order-success', (req, res) => {
+  res.render('user/order-success',{user:req.session.user});
+});
+
+router.get('/orders', async(req, res) => {
   let orders = await userHelpers.getUserOrders(req.session.user._id);
-  console.log(orders);
   res.render('user/orders',{user:req.session.user,orders});
-
 });
 
+router.get('/view-order-products/:id', async(req, res) => {
+  let products = await userHelpers.getOrderProducts(req.params.id);
+  res.render('user/view-order-products',{user:req.session.user,products});
+});
+
+router.post('/verify-payment',(req,res)=>{
+  console.log(req.body)
+})
 
 
 
