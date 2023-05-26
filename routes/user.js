@@ -5,7 +5,7 @@ const userHelpers = require('../helpers/user-helpers');
 
 
 const verifyLogin = (req, res, next) => {
-  if(req.session.user.loggedIn){
+  if(req.session.userLoggedIn){
     next();
   }else{
     res.redirect('/login');
@@ -27,7 +27,7 @@ router.get('/', async function (req, res, next) { // This is the root route
 });
 
 router.get('/login', (req, res) => {
-  if(req.session.user){
+  if(req.session.userLoggedIn){
     res.redirect('/');  //redirect to home page
   }else
     res.render('user/login',{"loginErr":req.session.userLoginErr}); //render is used to render the page, here it is login page
@@ -39,7 +39,7 @@ router.get('/signup', (req, res) => {
 router.post('/signup', (req, res) => {
   userHelpers.doSignup(req.body).then((response) => {
     console.log(response);
-    req.session.user.loggedIn = true;
+    req.session.userLoggedIn = true;
     req.session.user = response;
 
     res.redirect('/login'); //redirect to login page
@@ -50,7 +50,7 @@ router.post('/login', (req, res) => {
   userHelpers.doLogin(req.body).then((response) => {
     if (response.status) {
       req.session.user = response.user;
-      req.session.user.loggedIn = true;
+      req.session.userLoggedIn = true;
       
 
       res.redirect('/');
@@ -64,6 +64,7 @@ router.post('/login', (req, res) => {
 })
 router.get('/logout', (req, res) => {
   req.session.user = null;
+  req.session.userLoggedIn = false;
   res.redirect('/');
 });
 
