@@ -213,8 +213,8 @@ module.exports = {
             if (total && total.length > 0) {
                 resolve(total[0].total);
             } else {
-                // handle the case where total is undefined or empty
-                resolve(0);
+                
+                resolve(0)
             }
         })
     },
@@ -304,6 +304,34 @@ module.exports = {
                 resolve(order)
                 }
             });
+        })
+    },
+    verifyPayment:(details)=>{
+        return new Promise((resolve,reject)=>{
+            const crypto=require('crypto')
+            let hmac=crypto.createHmac('sha256','VAx21ATA6CLOBq74d56NSpYd')
+            hmac.update(details['payment[razorpay_order_id]']+'|'+details['payment[razorpay_payment_id]'])
+            hmac=hmac.digest('hex')
+            if(hmac==details['payment[razorpay_signature]']){
+                resolve()
+            }else{
+                reject()
+            }
+        })
+        
+    },
+    changePaymentStatus:(orderId)=>{
+        return new Promise((resolve,reject)=>{
+            db.get().collection(collection.ORDER_COLLECTIONS)
+            .updateOne({_id:new objectId(orderId)},
+                {
+                    $set:{
+                        status:'placed'
+                    }
+                }
+            ).then(()=>{
+                resolve()
+            })
         })
     }
 
