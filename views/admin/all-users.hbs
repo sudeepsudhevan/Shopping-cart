@@ -1,0 +1,31 @@
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 text-center">
+                <h1 class="text-center">All Users</h1>
+                <table class="table table-hovered">
+                    <thead>
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Email</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each users}}
+                        <tr>
+                            <td>{{this.name}}</td>
+                            <td>{{this.email}}</td>
+                            <td>
+                                <a href="/admin/delete-user/{{this._id}}" class="btn btn-danger" onclick="return confirm('Are you to delete {{this.name}} ?')">Delete</a>
+                                <a href="/admin/edit-user/{{this._id}}" class="btn btn-primary">Edit</a>
+                            </td>
+                            
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>

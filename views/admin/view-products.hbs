@@ -5,22 +5,23 @@
                 <a href="/admin/add-product" class="btn btn-success">Add Product</a>
                 
             </div>
-        <table class="table mt-5">
+        <table class="table mt-5" id="productsTable">
             
             <thead>
                 <tr>
-                    <th scope="col">No.</th>
+                    <th scope="col">ID</th>
                     <th scope="col">Title</th>
                     <th scope="col">Category</th>
                     <th scope="col">Description</th>
                     <th scope="col">Price</th>
                     <th scope="col">Image</th>
+                    <th scope="col">Actions</th>
                 </tr>
             </thead>
             <tbody>
                 {{#each products}}
                 <tr>
-                    <th scope="row">1</th>
+                    <td>{{this._id}}</td>
                     <td>{{this.Name}}</td>
                     <td>{{this.Category}}</td>
                     <td>{{this.Description}}</td>
@@ -36,3 +37,13 @@
         </table>
     </div>
 </section>
+
+<script>
+    $(function () {
+        $('#productsTable').DataTable();
+        
+        
+    });
+    
+</script>
+
